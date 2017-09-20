@@ -1,5 +1,6 @@
 #Author: Kaviarasan Selvam
 #This script gets all the datasets from the directory and saves them in 1 hdf5 file
+#Note: Step 1 and Step 2 are done seperately
 
 import numpy as np
 import h5py
