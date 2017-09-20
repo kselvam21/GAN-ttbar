@@ -1,6 +1,6 @@
 #Author: Kaviarasan Selvam
 #This script gets all the datasets from the directory and saves them in 1 hdf5 file
-#Note: Step 1 and Step 2 are done seperately
+#Note: Step 1 and Step 2 are done seperately. Comment Step 2 when doing Step 1 and vice versa
 
 import numpy as np
 import h5py
@@ -84,9 +84,6 @@ real_dataset9 = file9.get('TOPGEN9')
 
 real_dataset = np.concatenate((real_dataset1, real_dataset2, real_dataset3, real_dataset5, real_dataset6, real_dataset7, real_dataset8, real_dataset9), axis=0)
 
-
-#print "real_dataset.shape: ", real_dataset.shape
-
 #######################################################################
 
 
@@ -109,10 +106,6 @@ good_events = HasJet4*NoJet5
 real_dataset = real_dataset[good_events,:]
 
 print "\nDataset shape (after filtering2): ", real_dataset.shape, "\n"
-
-#print "real_dataset[0][:]: ", real_dataset[0][:]
-##print "real_dataset[30][:]: ", real_dataset[30][:]
-
 
 ######################################################################## 
 
