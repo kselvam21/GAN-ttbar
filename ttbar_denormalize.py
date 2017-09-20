@@ -1,3 +1,5 @@
+#Author: Kaviarasan Selvam
+#This function denormalizes input dataset based on predetermined values and outputs denormalized dataset
 #Input shape: (x, 38)
 #Output shape: (x, 38)
 
