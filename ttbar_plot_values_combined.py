@@ -1,11 +1,14 @@
-#This function plots Ht, MHT vector and Mt                                                                                                      
+#Author: Kaviarasan Selvam
+#This function plots high-level physical values using unnormalized low-level features of original and GAN-generated ttbar events 
+#Input Shape: (x, 38)
+#Output Shape: N/A
+
 import ROOT
 import random
 import math
 
 def plot_values_combined(real_dataset, fake_dataset):
-  #Dataset is not normalized                                                                                                                   
-
+  
   #Sub-samplong dataset                                                                                                                        
   num_samples = 1000000
 
