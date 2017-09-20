@@ -11,6 +11,12 @@ NOTE: All the code was run on NVIDIA GTX 1080 GPUs
 
 ### Executing Program
 1. Run ttbar_getdata_script.py <br />
-2. Run ttabr_gan.py <br />
+2. Run ttbar_gan.py <br />
 3. Run ttbar_plotting_script.py <br />
+
+## Author
+Kaviarasan Selvam
+
+## Acknowledgements
+[Maurizio Pierini](https://ch.linkedin.com/in/maurizio-pierini-a04889a) - the author's CERN mentor and supervisor
 
