@@ -1,5 +1,5 @@
-#Generative Adversarial Network for ttbar events
-#Based on: https://github.com/osh/KerasGAN/blob/master/MNIST_CNN_GAN.ipynb
+#Generative Adversarial Network (GAN)for ttbar events
+#Author: Kaviarasan Selvam
 
 #########################################################################
 #Import statements
@@ -11,24 +11,23 @@ import os, random
 os.environ["KERAS_BACKEND"] = "tensorflow"
 
 import numpy as np
-from keras.utils import np_utils
+import random, keras
 import keras.models as models
+
+from keras.utils import np_utils
+from keras.utils import plot_model
 from keras.layers import Input
 from keras.layers.core import Reshape, Dense, Dropout, Activation, Flatten
 from keras.layers.advanced_activations import LeakyReLU
-from keras.activations import *
 from keras.layers.wrappers import TimeDistributed
 from keras.layers.noise import GaussianNoise
 from keras.layers.convolutional import Conv2D, MaxPooling2D, ZeroPadding2D, UpSampling2D
 from keras.layers.recurrent import LSTM
-from keras.regularizers import *
 from keras.layers.normalization import *
+from keras.activations import *
+from keras.regularizers import *
 from keras.optimizers import *
-import cPickle, random, sys, keras
 from keras.models import Model
-from keras.utils import np_utils
-from keras.utils import plot_model
-from keras.layers.merge import Concatenate
 from keras.models import model_from_json
 
 from ttbar_normalize import normalize
@@ -40,73 +39,12 @@ from ttbar_deshape import deshape
 #########################################################################
 
 
-#########################################################################
-#Getting real_dataset
-#real_dataset.shape = (x, 38)
-#NUM FILES TO BE CHANGED
+########################################################################
+#Getting saved normalized datasets
+#Only run this part of the code after running ttbar_getdata_script.py
+#Dataset shape: (x, 38)
 
 import h5py
-import glob
-
-#myDatasets = ()
-##for myFileName in glob.glob('/afs/cern.ch/user/k/kselvam/datasets/TOPGEN/REDUCED_ttbar_lepFilter_13TeV_*.h5'):
-#for myFileName in glob.glob('/eos/user/m/mpierini/SYNC/DeepLearning/TOPGEN/DATA/ttbar_lepFilter_13TeV/REDUCED_ttbar_lepFilter_13TeV_*.h5'):
-#    myFile = h5py.File(myFileName)
-#    myDatasets = myDatasets + (myFile.get('TOPGEN'), )
-#myDataset = np.concatenate(myDatasets, axis=0)
-#
-#real_dataset = myDataset
-#
-#print "\nLoaded real dataset\n"
-#print "\nDataset shape (before filtering): ", real_dataset.shape, "\n"
-#########################################################################
-
-
-########################################################################
-#Filtering for good data
-#Removing dataset with 0 jets and 0 leptons
-#Removing events with JetPt > 180 and LepPt > 180
-
-#HasJet = real_dataset[:,0]>0
-#HasLepton = real_dataset[:,32]>0
-#Good = HasLepton*HasJet
-
-#real_dataset = real_dataset[Good,:]
-
-#print "\nDataset shape (after filtering): ", real_dataset.shape, "\n"
-
-########################################################################
-
-
-#########################################################################
-#Saving real samples in .h5 file for future use
-
-#f1 = h5py.File("real_dataset.h5", 'w')
-#f1.create_dataset("TOPGEN", data=real_dataset)
-#f1.close()
-
-#print "\nsaved real dataset\n"
-#########################################################################
-
-
-#########################################################################
-#Normalize dataset and save normalized dataset                           
-#The zero padding is not included here
-
-#real_dataset_norm = normalize(real_dataset)
-
-#f2 = h5py.File("real_dataset_norm.h5", 'w')
-#f2.create_dataset("TOPGEN_NORM", data=real_dataset_norm)
-#f2.close()
-
-#print "\nsaved real dataset normalized\n"
-
-#########################################################################
-
-
-########################################################################
-#Getting normalized saved datasets
-#Only run this part of the code after running ttbar_getdataset_script.py
 
 filename1 = 'real_dataset_norm.h5'
 file1 = h5py.File(filename1, 'r')
@@ -119,7 +57,7 @@ print "\nLoaded normalized dataset \n"
 
 ########################################################################
 #Reshaping dataset (also adding zero padding)
-#(x, 38) --> (x, 1, 6, 8)
+#Dataset shape: (x, 38) --> (x, 1, 4, 7)
 #Extra dimension added for compatibility with keras functions 
 
 real_dataset_norm = shape(real_dataset_norm)
@@ -132,7 +70,6 @@ real_dataset_norm = shape(real_dataset_norm)
 #Train:Test ratio = 70:30
 
 num_events = real_dataset_norm.shape[0]
-
 num_train = int(0.9*num_events)
 
 x_train = real_dataset_norm[0:num_train][:][:][:]
@@ -145,7 +82,6 @@ x_test = real_dataset_norm[num_train:][:][:][:]
 #Initializing parameters
 
 img_shape = x_train.shape[1:]
-# = (1, 6, 8)
 dropout_rate = 0.25
 opt = Adam(lr=1e-4)
 dopt = Adam(lr=1e-3)
@@ -155,8 +91,11 @@ dopt = Adam(lr=1e-3)
 
 ########################################################################
 #Building Generator Model
-#Take x random inputs and map them down to (1, 4, 7) pixel to match dataset
+#Take n random inputs and map them down to (x, 1, 4, 7) pixel to match dataset
 
+#***********************************************************************
+#************************     MODEL 1     ******************************
+#***********************************************************************
 #num_rand_inputs = 100
 
 #g_input = Input(shape=[num_rand_inputs])
@@ -177,6 +116,12 @@ dopt = Adam(lr=1e-3)
 #G = Conv2D(1, (1, 1), padding='same', kernel_initializer='glorot_uniform', data_format="channels_first")(G)
 #g_output = Activation('sigmoid')(G)
 
+#************************************************************************
+
+#***********************************************************************
+#**********************     MODEL 2     ********************************
+#***********************************************************************
+
 num_rand_inputs = 10
 
 g_input = Input(shape=[num_rand_inputs])
@@ -195,6 +140,7 @@ G = Activation('relu')(G)
 G = Conv2D(1, (1, 1), padding='same', kernel_initializer='glorot_uniform', data_format="channels_first")(G)
 g_output = Activation('sigmoid')(G)
 
+#************************************************************************
 
 generator = Model(inputs=g_input, outputs=g_output)
 generator.compile(loss='binary_crossentropy', optimizer=opt)
@@ -207,6 +153,7 @@ plot_model(generator, to_file='/afs/cern.ch/user/k/kselvam/cernbox/SYNC/GAN/mode
 
 ########################################################################
 #Build Discriminator Model
+#Take inputs of the shape (x, 1, 4, 7) and map it down to (x, 2)
 
 d_input = Input(shape=img_shape)
 D = Conv2D(256, (5, 5), strides=(2,2), padding='same', data_format="channels_first")(d_input)
@@ -241,6 +188,7 @@ def make_trainable(net, val):
   for i in net.layers:
     i.trainable = val
 
+#Uncomment next line only when make_trainable() is needed
 #make_trainable(discriminator, False)
 
 #########################################################################
@@ -248,6 +196,7 @@ def make_trainable(net, val):
 
 #########################################################################
 #Label flipping
+#Optional optimization for GANs
 
 #def flip_labels(arr):
 #  Y = arr
@@ -266,6 +215,7 @@ def make_trainable(net, val):
 
 #########################################################################
 #Label smoothing
+#Optional optimization for GANs
 
 #def smooth_labels(arr):
 #  Y = arr
@@ -350,7 +300,8 @@ def train_for_n(nb_epoch=5000, plt_frq=25, BATCH_SIZE=32):
     #noise_gen = np.random.normal(0.5, 0.2, size=[BATCH_SIZE, num_rand_inputs])
     noise_gen = np.random.uniform(0, 1, size=[BATCH_SIZE, num_rand_inputs])
     generated_images = generator.predict(noise_gen)
-
+    
+    #Save results in last iteration
     if e == (nb_epoch-1):
       #noise = np.random.normal(0.5, 0.2, size=[1000000, num_rand_inputs])
       noise = np.random.uniform(0, 1, size=[1000000, num_rand_inputs])
