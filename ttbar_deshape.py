@@ -1,13 +1,15 @@
-#Written specifically for ttbar dataset (x, 66)
+#Author: Kaviarasan Selvam
+#This function deshapes a dataset that was reshaped to facilitate training of the GAN and returns the deshaped dataset
 #Input: (x, 1, 4, 7)
+#Output: (x, 38)
+#Remark: Values between col 20-29 are zeros (5th and 6th Jet)
 
+# [INPUT]
 #  JetPt1     JetEta1     JetPhi1     JetMass1    JetBtag1     LepCharge     LepIsEle
 #  JetPt2     JetEta2     JetPhi2     JetMass2    JetBtag2     LepPt         LepEta
 #  JetPt3     JetEta3     JetPhi3     JetMass3    JetBtag3     LepPhi        LepIsoPhoton
 #  JetPt4     JetEta4     JetPhi4     JetMass4    JetBtag4     LepIsoChHad   LepIsoNeuHad
 
-#Output: (x, 38)
-#Remark: Values between col 20-29 are zeros (5th and 6th Jet)
 
 import numpy as np
 
