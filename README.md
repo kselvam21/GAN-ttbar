@@ -16,7 +16,7 @@ This GitHub repository contains the code that was used in an attempt to use GANs
 NOTE: All the code was run on NVIDIA GTX 1080 GPUs
 
 ## Author
-Kaviarasan Selvam
+Kaviarasan Selvam, Boston University '18
 
 ## Acknowledgements
 [Maurizio Pierini](https://ch.linkedin.com/in/maurizio-pierini-a04889a), CERN - the author's CERN mentor and supervisor
