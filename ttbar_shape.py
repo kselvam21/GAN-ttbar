@@ -4,7 +4,7 @@
 #Output Shape: (x, 1, 4, 7)
 #Remark: Not all values from the input dataset are used (Columns 20-29 excluded)
 
-# [INPUT]
+# [OUTPUT]
 #  JetPt1     JetEta1     JetPhi1     JetMass1    JetBtag1     LepCharge     LepIsEle
 #  JetPt2     JetEta2     JetPhi2     JetMass2    JetBtag2     LepPt         LepEta
 #  JetPt3     JetEta3     JetPhi3     JetMass3    JetBtag3     LepPhi        LepIsoPhoton
