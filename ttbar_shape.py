@@ -1,6 +1,9 @@
-#This function was written to reshape the ttbar dataset as such:
-# (x, 38) ---> (x, 4, 7)
-#
+#Author: Kaviarasan Selvam
+#This function reshapes the input dataset to facilitate the training of the GAN
+#Input Shape: (x, 38)
+#Output Shape: (x, 1, 4, 7)
+
+# [INPUT]
 #  JetPt1     JetEta1     JetPhi1     JetMass1    JetBtag1     LepCharge     LepIsEle
 #  JetPt2     JetEta2     JetPhi2     JetMass2    JetBtag2     LepPt         LepEta
 #  JetPt3     JetEta3     JetPhi3     JetMass3    JetBtag3     LepPhi        LepIsoPhoton
