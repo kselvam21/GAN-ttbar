@@ -7,6 +7,7 @@ This GitHub repository contains the code that was used in an attempt to use GANs
 * The code was written in Python. You will need the various Python packages imported in the code to run it
 * [Keras](https://keras.io/) API was used
 * [TensorFlow](https://www.tensorflow.org/) machine learning framework was used
+* [ROOT](https://root.cern.ch/) scientific software framework was used to make plots
 NOTE: All the code was run on NVIDIA GTX 1080 GPUs
 
 ### Executing Program
