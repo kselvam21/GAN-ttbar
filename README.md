@@ -19,5 +19,5 @@ NOTE: All the code was run on NVIDIA GTX 1080 GPUs
 Kaviarasan Selvam
 
 ## Acknowledgements
-[Maurizio Pierini](https://ch.linkedin.com/in/maurizio-pierini-a04889a) - the author's CERN mentor and supervisor
+[Maurizio Pierini](https://ch.linkedin.com/in/maurizio-pierini-a04889a), CERN - the author's CERN mentor and supervisor
 
