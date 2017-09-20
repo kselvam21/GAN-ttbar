@@ -1,12 +1,12 @@
-#This function plots the features and other necessary values
-#This function was specifically written for the ttbar datasets
-#Dataset Shape: (x, 66)
+#Author: Kaviarasan Selvam
+#This function plots the normalized low-level features of original and GAN-generated ttbar events on 1 plot
+#Input Shape: (x, 38)
+#Output Shape: N/A
 
 import ROOT
 import random
 
 def plot_features_combined(real_dataset, fake_dataset):
-  #Dataset is normalized
 
   #Sub-sampling real dataset
   num_samples = 1000000
@@ -23,6 +23,7 @@ def plot_features_combined(real_dataset, fake_dataset):
   lep_min_idx = 30
   lep_max_idx = 37
 
+  #For plot formatting purposes
   ROOT.gStyle.SetOptStat(ROOT.kFALSE);
 
   #Initializing histograms
