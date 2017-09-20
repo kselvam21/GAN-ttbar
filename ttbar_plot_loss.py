@@ -1,4 +1,9 @@
-#Contains functions to plot GAN losses
+#Author: Kaviarasan Selvam
+#Function 1: Plots Discriminator and Generator losses on same plot
+#Function 2: Plots Discriminator loss
+#Function 3: Plots Generator loss
+#Input: Vector of Discriminator and Generator losses
+#Output: N/A
 
 import matplotlib
 matplotlib.use('Agg')
