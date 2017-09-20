@@ -1,4 +1,6 @@
-#This script is written to call the plotting functions to plot all the values saved as .h5 files in this directory
+#Author: Kaviarasan Selvam
+#This script calls all the functions necessary to make the required plots of values stored in .h5 files in the directory
+#This script should only be run after training the GAN
 
 import numpy as np
 import h5py
