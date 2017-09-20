@@ -1,5 +1,5 @@
 #Author: Kaviarasan Selvam
-#This function plots the normalized low-level features of original and GAN-generated ttbar events on 1 plot
+#This function plots the normalized low-level features of original and GAN-generated ttbar events
 #Input Shape: (x, 38)
 #Output Shape: N/A
 
