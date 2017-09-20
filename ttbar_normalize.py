@@ -1,4 +1,7 @@
-#Input dataset shape: (x, 38)
+#Author: Kaviarasan Selvam
+#This function normalizes input dataset based on predetermined values and outputs normalized dataset
+#Input shape: (x, 38)
+#Output shape: (x, 38)
 
 import numpy as np
 import h5py
@@ -57,7 +60,8 @@ def normalize(dataset):
     for jet_idx in range(jet_min_idx, jet_max_idx + 1):
 
       #JetPt (NOT TO BE CHANGED)
-
+      #if jet_idx%5 == 0:
+      
       #JetEta                                                                                                            
       if jet_idx%5 == 1:
         if dataset[i][jet_idx] == 0:
@@ -74,6 +78,7 @@ def normalize(dataset):
           new_dataset[i][jet_idx] = (dataset[i][jet_idx])/(2*(math.pi))
 
       #JetMass (NOT TO BE CHANGED)
+      #if jet_idx%5 == 3:
 
       #JetBtag (NO NEED FOR NORMALIZATION)
       if jet_idx%5 == 4:
@@ -101,6 +106,7 @@ def normalize(dataset):
         new_dataset[i][lep_idx] = dataset[i][lep_idx]
 
       #LepPt (NOT TO BE CHANGED)
+      #if (lep_idx - lep_min_idx)%8 == 2:
 
       #LepEta                                                                                                                                  
       if (lep_idx - lep_min_idx)%8 == 3:
