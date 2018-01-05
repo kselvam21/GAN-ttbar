@@ -19,6 +19,6 @@ NOTE: All the code was run on NVIDIA GTX 1080 GPUs
 Kaviarasan Selvam, Boston University '18
 
 ## Acknowledgements
-[Maurizio Pierini](https://ch.linkedin.com/in/maurizio-pierini-a04889a), CERN - the author's CERN mentor
+[Maurizio Pierini](https://ch.linkedin.com/in/maurizio-pierini-a04889a), CERN - the author's CERN mentor <br />
 [Tiziano Camporesi](https://www.linkedin.com/in/tiziano-camporesi-3011978/), CERN - the author's CERN supervisor
 
